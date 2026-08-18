@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { getAllPosts, formatDate, getAllTags, readingMin } from '@/lib/posts';
 import { href } from '@/lib/url';
-import { canonicalUrl, absoluteUrl, getSiteConfig } from '@/lib/site';
+import { getNetwork } from '@/lib/network';
+import { canonicalUrl, absoluteUrl, getSiteConfig, siteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
 const site = getSiteConfig();
+const network = getNetwork();
 
 export const metadata: Metadata = {
   title: `${site.siteName} — ${site.tagline}`,
@@ -65,6 +67,54 @@ function PostCard({ post, featured }: { post: ReturnType<typeof getAllPosts>[num
   );
 }
 
+function CategoryCard({
+  repo,
+  name,
+  category,
+  note,
+  palette,
+}: {
+  repo: string;
+  name: string;
+  category: string;
+  note?: string;
+  palette?: { accent: string; accent2: string };
+}) {
+  const accent = palette?.accent || site.brand.accent;
+  const accent2 = palette?.accent2 || site.brand.accent2;
+  return (
+    <Link
+      href={`${siteUrl}/${repo}/`}
+      prefetch={false}
+      className="group card card-hover p-6 relative overflow-hidden"
+    >
+      <div
+        className="absolute inset-x-0 top-0 h-1 opacity-80"
+        style={{ backgroundImage: `linear-gradient(to right, ${accent}, ${accent2})` }}
+        aria-hidden="true"
+      />
+      <div className="flex items-start justify-between mb-4">
+        <span
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-sm font-extrabold"
+          style={{ backgroundColor: `${accent}1f`, color: accent }}
+          aria-hidden="true"
+        >
+          {name.replace(/^Wim\s*/, '').slice(0, 2).toUpperCase()}
+        </span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-gray-400 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-brand" aria-hidden="true">
+          <path d="M7 17L17 7M8 7h9v9" />
+        </svg>
+      </div>
+      <h3 className="font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-brand transition-colors">
+        {name}
+      </h3>
+      <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+        {note || `Situs kategori ${category} dalam jaringan Wim.`}
+      </p>
+    </Link>
+  );
+}
+
 export default function HomePage() {
   const posts = getAllPosts();
   const featured = posts.slice(0, 2);
@@ -72,55 +122,108 @@ export default function HomePage() {
   const tags = getAllTags().slice(0, 10);
   const totalReadMins = posts.reduce((acc, p) => acc + readingMin(p.body), 0);
 
+  const allSites = [...network.sites, ...network.topics];
+  const me = allSites.find((s) => s.repo === site.repo);
+  const isPortal = Boolean(me && me.children.length > 0);
+  const categories = (me?.children || [])
+    .map((repo) => allSites.find((s) => s.repo === repo))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+  const topicsCount = network.topics.length;
+
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden py-10 md:py-16 mb-8">
+      <section className="relative overflow-hidden py-10 md:py-16 mb-10">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
           <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand2/10 blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-brand2/5 blur-3xl" />
         </div>
-        <div className="relative mx-auto max-w-2xl text-center">
+        <div className="relative mx-auto max-w-3xl text-center">
           <span className="badge bg-brand/15 text-brand mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-            Selamat datang di blog saya
+            {isPortal ? `Jaringan ${categories.length} situs niche` : `Blog ${site.categoryLabel}`}
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight mb-5">
-            Belajar Teknologi & <span className="text-gradient">Web Development</span>
+            {isPortal ? (
+              <>
+                {site.siteName} — <span className="text-gradient">{site.tagline}</span>
+              </>
+            ) : (
+              <span className="text-gradient">{site.tagline}</span>
+            )}
           </h1>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            Kumpulan artikel tentang pengembangan web, SEO, dan teknologi — ditulis dengan bahasa yang mudah dipahami untuk pemula hingga menengah.
+            {site.description}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href={href('/posts/')} prefetch={false} className="btn btn-primary">
-              Jelajahi Artikel
+              {isPortal ? 'Artikel Terbaru' : 'Jelajahi Artikel'}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </Link>
             <Link href={href('/about/')} prefetch={false} className="btn btn-secondary">
-              Tentang Saya
+              {isPortal ? 'Tentang Jaringan' : 'Tentang Saya'}
             </Link>
           </div>
-          <div className="mt-10 flex items-center justify-center gap-8 text-center">
-            <div>
-              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{posts.length}+</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Artikel</p>
+          {!isPortal && (
+            <div className="mt-10 flex items-center justify-center gap-8 text-center">
+              <div>
+                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{posts.length}+</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Artikel</p>
+              </div>
+              <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
+              <div>
+                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{tags.length}+</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Topik</p>
+              </div>
+              <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
+              <div>
+                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{Math.ceil(totalReadMins / 60)}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Jam Membaca</p>
+              </div>
             </div>
-            <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
-            <div>
-              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{tags.length}+</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Topik</p>
-            </div>
-            <div className="h-8 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true" />
-            <div>
-              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{Math.ceil(totalReadMins / 60)}</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Jam Membaca</p>
-            </div>
-          </div>
+          )}
         </div>
       </section>
+
+      {/* Grid kategori (hanya untuk portal/hub) */}
+      {isPortal && (
+        <section className="mb-12">
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Jelajahi Kategori</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Pilih situs niche, setiap kategori punya topik dan konten khusus.</p>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {categories.map((s) => (
+              <CategoryCard
+                key={s.repo}
+                repo={s.repo}
+                name={s.name}
+                category={s.category}
+                note={s.note}
+                palette={network.brandPalettes?.[s.category]}
+              />
+            ))}
+            {topicsCount > 0 && (
+              <div className="card p-6 flex flex-col justify-between bg-gradient-to-br from-brand/10 via-brand2/10 to-brand2/10 relative overflow-hidden">
+                <div>
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-sm font-extrabold bg-brand/15 text-brand" aria-hidden="true">
+                    +{topicsCount}
+                  </span>
+                  <h3 className="mt-4 font-bold tracking-tight text-gray-900 dark:text-white">Topik Spesifik</h3>
+                  <p className="mt-1.5 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                    Situs topik di bawah kategori, misalnya AI, pemrograman, game mobile, dan sepak bola.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Featured posts */}
       {featured.length > 0 && (
@@ -138,12 +241,14 @@ export default function HomePage() {
       )}
 
       {/* Recent posts */}
-      <section className="mb-12">
-        <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Terbaru</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((post) => <PostCard key={post.slug} post={post} />)}
-        </div>
-      </section>
+      {rest.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Terbaru</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {rest.map((post) => <PostCard key={post.slug} post={post} />)}
+          </div>
+        </section>
+      )}
 
       {/* Topics */}
       {tags.length > 0 && (
