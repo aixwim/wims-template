@@ -95,8 +95,11 @@ function CategoryCard({
       />
       <div className="flex items-start justify-between mb-4">
         <span
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-sm font-extrabold"
-          style={{ backgroundColor: `${accent}1f`, color: accent }}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-sm font-extrabold text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${accent}, ${accent2})`,
+            boxShadow: `0 4px 14px ${accent}40`,
+          }}
           aria-hidden="true"
         >
           {name.replace(/^Wim\s*/, '').slice(0, 2).toUpperCase()}

@@ -140,7 +140,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Lewati ke konten
         </a>
         <Header
-          siteName={site.siteName}
           logoText={site.logoText}
           logoPrefix={site.logoPrefix ?? ''}
         />

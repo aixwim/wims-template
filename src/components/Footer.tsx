@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <Logo siteName={site.siteName} logoText={site.logoText} logoPrefix={site.logoPrefix ?? ''} />
+            <Logo logoText={site.logoText} logoPrefix={site.logoPrefix ?? ''} />
             <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
               {site.description}
             </p>

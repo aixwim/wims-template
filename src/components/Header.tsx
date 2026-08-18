@@ -13,7 +13,7 @@ const navLinks = [
   { href: href('/contact/'), label: 'Contact' },
 ];
 
-export default function Header({ siteName, logoText, logoPrefix }: { siteName: string; logoText: string; logoPrefix: string }) {
+export default function Header({ logoText, logoPrefix }: { logoText: string; logoPrefix: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
@@ -50,7 +50,7 @@ export default function Header({ siteName, logoText, logoPrefix }: { siteName: s
     >
       <div className="mx-auto max-w-screen-lg px-5 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Logo siteName={siteName} logoText={logoText} logoPrefix={logoPrefix} />
+          <Logo logoText={logoText} logoPrefix={logoPrefix} />
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Navigasi utama">

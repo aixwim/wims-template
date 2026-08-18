@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { href } from '@/lib/url';
 
-export default function Logo({ siteName, logoText, logoPrefix }: { siteName: string; logoText: string; logoPrefix: string }) {
+export default function Logo({ logoText, logoPrefix }: { logoText: string; logoPrefix: string }) {
   return (
     <Link
       href={href('/')}
       prefetch={false}
       className="group flex items-center gap-2.5"
-      aria-label={`${siteName} — Home`}
+      aria-label={`${logoPrefix}${logoText}`}
     >
       <span
         className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl shadow-md transition-transform duration-300 group-hover:scale-105"

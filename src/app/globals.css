@@ -167,6 +167,12 @@
     color: transparent;
   }
 
+  /* Dark mode: angkat kontras teks (dark-only site) */
+  .dark .text-gray-500,
+  .dark\:text-gray-500 { color: var(--color-gray-400) !important; }
+  .dark .text-brand { color: color-mix(in srgb, var(--brand-accent) 55%, #ffffff) !important; }
+  .dark .text-brand2 { color: color-mix(in srgb, var(--brand-accent2) 55%, #ffffff) !important; }
+
   .card {
     border-radius: 1rem;
     border: 1px solid var(--color-gray-200);
