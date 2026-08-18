@@ -4,10 +4,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { href } from '@/lib/url';
 import { siteUrl, basePath, absoluteUrl, getSiteConfig } from '@/lib/site';
+import { getNetwork } from '@/lib/network';
 
 const site = getSiteConfig();
 const siteName = site.siteName;
 const description = site.description;
+const network = getNetwork();
+const networkSites = [...network.sites, ...network.topics];
+const isHub = network.hub === site.repo;
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -94,6 +98,24 @@ const jsonLd = {
   },
 };
 
+const networkJsonLd = isHub
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Jaringan Wim',
+      url: absoluteUrl('/'),
+      description,
+      knowsAbout: networkSites.map((s) => s.name),
+      member: networkSites
+        .filter((s) => s.repo !== site.repo && s.status !== 'planned')
+        .map((s) => ({
+          '@type': 'WebSite',
+          name: s.name,
+          url: `${siteUrl}/${s.repo}/`,
+        })),
+    }
+  : null;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -111,6 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {networkJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(networkJsonLd) }} />}
       </head>
       <body className="min-h-screen bg-gray-950 text-gray-300 antialiased flex flex-col">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] bg-brand text-white px-4 py-2 rounded-md">
