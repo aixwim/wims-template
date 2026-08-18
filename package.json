@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && touch out/.nojekyll",
+    "build": "next build && node scripts/cleanup-chunks.mjs && touch out/.nojekyll",
     "start": "next start",
     "lint": "eslint src/",
     "assets": "node scripts/generate-assets.mjs",
