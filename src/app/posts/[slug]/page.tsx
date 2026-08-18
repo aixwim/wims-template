@@ -126,13 +126,9 @@ export default async function PostPage({ params }: Props) {
           <header className="mb-8">
             <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
               {post.category && (
-                <Link
-                  href={href(`/tags/${post.category.toLowerCase()}/`)}
-                  prefetch={false}
-                  className="badge bg-brand/15 text-brand hover:bg-brand/25 dark:bg-brand/15 dark:text-brand dark:hover:bg-brand/25 transition-colors"
-                >
+                <span className="badge bg-brand/15 text-brand dark:bg-brand/15 dark:text-brand transition-colors">
                   {post.category}
-                </Link>
+                </span>
               )}
               <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
               <span aria-hidden="true">&middot;</span>

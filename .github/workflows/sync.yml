@@ -1,0 +1,30 @@
+name: Sync Template
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"   # tiap 6 jam
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone template
+        run: git clone --depth 1 https://github.com/aixwim/wims-template /tmp/template
+      - name: Run sync script
+        run: node scripts/sync-theme.mjs --template /tmp/template --site .
+      - name: Open PR if changed
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan"
+          else
+            git commit -m "chore: sync theme from wims-template"
+            git push origin HEAD:sync-template
+            gh pr create --base main --head sync-template --title "Sync tema" --body "Auto-sync dari wims-template" || true
+          fi
