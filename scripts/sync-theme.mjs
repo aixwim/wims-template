@@ -62,6 +62,8 @@ const NEVER_SYNC = new Set([
   'public/og.png',
   'public/favicon.svg',
   'registry',
+  'src/app/page.tsx',
+  'src/lib/network.ts',
 ]);
 
 function hashFile(file) {

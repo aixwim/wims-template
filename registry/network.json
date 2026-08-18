@@ -23,7 +23,8 @@
       ],
       "related": [],
       "status": "active",
-      "note": "Portal utama jaringan"
+      "note": "Portal utama jaringan",
+      "articleCount": 1
     },
     {
       "repo": "wims-bisnis",
@@ -36,7 +37,8 @@
         "wims-berita",
         "wims-teknologi"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-selebritas",
@@ -49,7 +51,8 @@
         "wims-style",
         "wims-entertainment"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-kultur",
@@ -62,7 +65,8 @@
         "wims-living",
         "wims-entertainment"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-entertainment",
@@ -75,7 +79,8 @@
         "wims-game",
         "wims-selebritas"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-game",
@@ -90,7 +95,8 @@
         "wims-teknologi",
         "wims-entertainment"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-living",
@@ -103,7 +109,8 @@
         "wims-style",
         "wims-kultur"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-berita",
@@ -116,7 +123,8 @@
         "wims-bisnis",
         "wims-olahraga"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-style",
@@ -129,7 +137,8 @@
         "wims-selebritas",
         "wims-living"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     },
     {
       "repo": "wims-teknologi",
@@ -146,7 +155,8 @@
         "wims-bisnis"
       ],
       "status": "active",
-      "note": "34 artikel tech existing dipindah dari wims hub"
+      "note": "34 artikel tech existing dipindah dari wims hub",
+      "articleCount": 34
     },
     {
       "repo": "wims-olahraga",
@@ -161,7 +171,8 @@
         "wims-berita",
         "wims-living"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 4
     }
   ],
   "topics": [
@@ -175,7 +186,8 @@
       "related": [
         "wims-teknologi-pemrograman"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 3
     },
     {
       "repo": "wims-teknologi-pemrograman",
@@ -187,7 +199,8 @@
       "related": [
         "wims-teknologi-ai"
       ],
-      "status": "active"
+      "status": "active",
+      "articleCount": 3
     },
     {
       "repo": "wims-game-mobile",
@@ -197,7 +210,8 @@
       "parent": "wims-game",
       "children": [],
       "related": [],
-      "status": "active"
+      "status": "active",
+      "articleCount": 3
     },
     {
       "repo": "wims-olahraga-sepakbola",
@@ -207,7 +221,8 @@
       "parent": "wims-olahraga",
       "children": [],
       "related": [],
-      "status": "active"
+      "status": "active",
+      "articleCount": 3
     }
   ],
   "brandPalettes": {
