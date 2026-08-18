@@ -31,7 +31,7 @@ function walk(d, base, out = []) {
 const files = walk(chunksDir, chunksDir);
 
 const refs = new Set();
-const re = /\/_next\/static\/chunks\/[^"'\s<>\\]*\.js/g;
+const re = /\/_next\/static\/chunks\/[^"'\s<>\\]*\.(?:js|css)/g;
 for (const f of walk(join(root, 'out'), join(root, 'out'))) {
   if (f.endsWith('.js') || f.endsWith('.html') || f.endsWith('.txt')) {
     const c = readFileSync(f, 'utf8');
