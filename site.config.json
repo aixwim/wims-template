@@ -1,0 +1,17 @@
+{
+  "repo": "wims-template",
+  "siteName": "Wim Template",
+  "logoText": "niche",
+  "logoPrefix": "wim",
+  "tagline": "Tagline situs",
+  "description": "Deskripsi meta situs.",
+  "ogTitle": "Judul OG<br>untuk situs ini",
+  "ogSubtitle": "Subtitle OG singkat dan informatif.",
+  "category": "template",
+  "categoryLabel": "Template",
+  "parent": "wims",
+  "children": [],
+  "related": [],
+  "brand": { "accent": "#6366f1", "accent2": "#8b5cf6" },
+  "giscus": { "repoId": "REPO_ID", "categoryId": "CATEGORY_ID" }
+}

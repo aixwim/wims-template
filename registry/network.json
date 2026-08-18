@@ -1,0 +1,178 @@
+{
+  "$schema": "https://aixwim.github.io/wims-docs/registry/schema.json",
+  "updated": "2026-08-18",
+  "hub": "wims",
+  "sites": [
+    {
+      "repo": "wims",
+      "name": "Wim",
+      "category": "hub",
+      "categoryLabel": "Hub",
+      "parent": null,
+      "children": [
+        "wims-bisnis", "wims-selebritas", "wims-kultur",
+        "wims-entertainment", "wims-game", "wims-living",
+        "wims-berita", "wims-style", "wims-teknologi", "wims-olahraga"
+      ],
+      "related": [],
+      "status": "active",
+      "note": "Portal utama jaringan"
+    },
+    {
+      "repo": "wims-bisnis",
+      "name": "Wim Bisnis",
+      "category": "bisnis",
+      "categoryLabel": "Bisnis",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-berita", "wims-teknologi"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-selebritas",
+      "name": "Wim Selebritas",
+      "category": "selebritas",
+      "categoryLabel": "Selebritas",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-style", "wims-entertainment"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-kultur",
+      "name": "Wim Kultur",
+      "category": "kultur",
+      "categoryLabel": "Kultur",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-living", "wims-entertainment"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-entertainment",
+      "name": "Wim Entertainment",
+      "category": "entertainment",
+      "categoryLabel": "Entertainment",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-game", "wims-selebritas"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-game",
+      "name": "Wim Game",
+      "category": "game",
+      "categoryLabel": "Game",
+      "parent": "wims",
+      "children": ["wims-game-mobile"],
+      "related": ["wims-teknologi", "wims-entertainment"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-living",
+      "name": "Wim Living",
+      "category": "living",
+      "categoryLabel": "Living",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-style", "wims-kultur"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-berita",
+      "name": "Wim Berita",
+      "category": "berita",
+      "categoryLabel": "Berita",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-bisnis", "wims-olahraga"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-style",
+      "name": "Wim Style",
+      "category": "style",
+      "categoryLabel": "Style",
+      "parent": "wims",
+      "children": [],
+      "related": ["wims-selebritas", "wims-living"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-teknologi",
+      "name": "Wim Teknologi",
+      "category": "teknologi",
+      "categoryLabel": "Teknologi",
+      "parent": "wims",
+      "children": ["wims-teknologi-ai", "wims-teknologi-pemrograman"],
+      "related": ["wims-game", "wims-bisnis"],
+      "status": "planned",
+      "note": "Akan menampung 35 artikel tech existing dari wims"
+    },
+    {
+      "repo": "wims-olahraga",
+      "name": "Wim Olahraga",
+      "category": "olahraga",
+      "categoryLabel": "Olahraga",
+      "parent": "wims",
+      "children": ["wims-olahraga-sepakbola"],
+      "related": ["wims-berita", "wims-living"],
+      "status": "planned"
+    }
+  ],
+  "topics": [
+    {
+      "repo": "wims-teknologi-ai",
+      "name": "Wim Teknologi AI",
+      "category": "teknologi",
+      "categoryLabel": "Teknologi",
+      "parent": "wims-teknologi",
+      "children": [],
+      "related": ["wims-teknologi-pemrograman"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-teknologi-pemrograman",
+      "name": "Wim Teknologi Pemrograman",
+      "category": "teknologi",
+      "categoryLabel": "Teknologi",
+      "parent": "wims-teknologi",
+      "children": [],
+      "related": ["wims-teknologi-ai"],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-game-mobile",
+      "name": "Wim Game Mobile",
+      "category": "game",
+      "categoryLabel": "Game",
+      "parent": "wims-game",
+      "children": [],
+      "related": [],
+      "status": "planned"
+    },
+    {
+      "repo": "wims-olahraga-sepakbola",
+      "name": "Wim Olahraga Sepak Bola",
+      "category": "olahraga",
+      "categoryLabel": "Olahraga",
+      "parent": "wims-olahraga",
+      "children": [],
+      "related": [],
+      "status": "planned"
+    }
+  ],
+  "brandPalettes": {
+    "bisnis": { "accent": "#10b981", "accent2": "#059669" },
+    "selebritas": { "accent": "#ec4899", "accent2": "#f43f5e" },
+    "kultur": { "accent": "#f59e0b", "accent2": "#d97706" },
+    "entertainment": { "accent": "#d946ef", "accent2": "#c026d3" },
+    "game": { "accent": "#8b5cf6", "accent2": "#7c3aed" },
+    "living": { "accent": "#14b8a6", "accent2": "#84cc16" },
+    "berita": { "accent": "#ef4444", "accent2": "#dc2626" },
+    "style": { "accent": "#f43f5e", "accent2": "#e11d48" },
+    "teknologi": { "accent": "#6366f1", "accent2": "#06b6d4" },
+    "olahraga": { "accent": "#3b82f6", "accent2": "#22c55e" },
+    "hub": { "accent": "#6366f1", "accent2": "#8b5cf6" }
+  }
+}

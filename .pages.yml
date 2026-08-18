@@ -1,0 +1,111 @@
+settings:
+  commit:
+    identity: app
+    templates:
+      create: "content(create): {name} — {userName}"
+      update: "content(update): {name} — {userName}"
+      delete: "content(delete): {name} — {userName}"
+      rename: "content(rename): {oldFilename} -> {newFilename}"
+
+media:
+  - name: uploads
+    label: Uploads
+    input: public/uploads
+    output: /uploads
+
+content:
+  - name: posts
+    label: Artikel
+    type: collection
+    path: content
+    format: yaml-frontmatter
+    filename: "{slug}.md"
+    commit:
+      templates:
+        create: "article(create): {name} — {userName}"
+        update: "article(update): {name} — {userName}"
+        delete: "article(delete): {name} — {userName}"
+        rename: "article(rename): {oldFilename} -> {newFilename}"
+    fields:
+      - name: title
+        label: Judul
+        type: string
+        required: true
+        options:
+          minlength: 3
+          maxlength: 120
+      - name: slug
+        label: Slug URL
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+        description: "Identitas URL artikel, contoh: cara-membuat-website"
+        options:
+          maxlength: 120
+      - name: date
+        label: Tanggal
+        type: date
+        required: true
+      - name: category
+        label: Kategori
+        type: select
+        options:
+          values:
+            - name: Tutorial
+              label: Tutorial
+            - name: Tips
+              label: Tips
+            - name: SEO
+              label: SEO
+            - name: Perkenalan
+              label: Perkenalan
+            - name: Teknologi
+              label: Teknologi
+          placeholder: "Pilih kategori"
+      - name: excerpt
+        label: Ringkasan
+        type: text
+        required: true
+        description: "Ringkasan singkat artikel untuk daftar dan SEO."
+        options:
+          minlength: 20
+          maxlength: 200
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        description: "Pisahkan dengan koma, contoh: nextjs, seo, javascript"
+      - name: cover
+        label: Gambar Sampul
+        type: image
+        description: "Opsional, gunakan gambar dari media uploads."
+      - name: meta_title
+        label: Judul SEO (opsional)
+        type: string
+        description: "Judul khusus untuk mesin pencari. Kosongkan untuk memakai judul artikel."
+        options:
+          maxlength: 70
+      - name: meta_description
+        label: Deskripsi SEO (opsional)
+        type: text
+        description: "Deskripsi khusus untuk mesin pencari."
+        options:
+          maxlength: 160
+      - name: draft
+        label: Draft
+        type: boolean
+        description: "Centang jika artikel belum siap terbit."
+      - name: body
+        label: Isi Artikel
+        type: rich-text
+    view:
+      primary: title
+      secondary: date
+      sort: date
+      order: desc
+      default: grid
+      fields:
+        - title
+        - category
+        - date
+        - tags
