@@ -1,6 +1,6 @@
 {
   "$schema": "https://aixwim.github.io/wims-docs/registry/schema.json",
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "hub": "wims",
   "sites": [
     {
@@ -24,7 +24,7 @@
       "related": [],
       "status": "active",
       "note": "Portal utama jaringan",
-      "articleCount": 1
+      "articleCount": 10
     },
     {
       "repo": "wims-bisnis",
@@ -38,7 +38,7 @@
         "wims-teknologi"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-selebritas",
@@ -52,7 +52,7 @@
         "wims-entertainment"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-kultur",
@@ -66,7 +66,7 @@
         "wims-entertainment"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-entertainment",
@@ -80,7 +80,7 @@
         "wims-selebritas"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-game",
@@ -96,7 +96,7 @@
         "wims-entertainment"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-living",
@@ -110,7 +110,7 @@
         "wims-kultur"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-berita",
@@ -124,7 +124,7 @@
         "wims-olahraga"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-style",
@@ -138,7 +138,7 @@
         "wims-living"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     },
     {
       "repo": "wims-teknologi",
@@ -172,7 +172,7 @@
         "wims-living"
       ],
       "status": "active",
-      "articleCount": 4
+      "articleCount": 10
     }
   ],
   "topics": [
