@@ -15,6 +15,7 @@ export interface SiteConfig {
   related: string[];
   brand: { accent: string; accent2: string };
   giscus?: { repoId: string; categoryId: string };
+  googleVerification?: string;
 }
 
 export const siteUrl = 'https://aixwim.github.io';

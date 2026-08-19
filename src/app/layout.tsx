@@ -59,6 +59,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
   },
+  ...(site.googleVerification ? { verification: { google: site.googleVerification } } : {}),
   alternates: {
     types: {
       'application/rss+xml': [{ title: siteName, url: href('/rss.xml') }],
