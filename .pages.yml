@@ -1,4 +1,6 @@
 settings:
+  content:
+    merge: true
   commit:
     identity: app
     templates:
@@ -12,6 +14,45 @@ media:
     label: Uploads
     input: public/uploads
     output: /uploads
+    rename: safe
+    categories: [image]
+    extensions: [png, jpg, jpeg, gif, webp, svg]
+    actions:
+      - name: optimize-images
+        label: Optimasi gambar
+        workflow: pages-cms-media.yml
+        confirm:
+          title: Optimasi gambar?
+          message: Menjalankan workflow optimasi untuk upload baru.
+          button: Optimasi
+
+components:
+  seo:
+    type: object
+    label: SEO
+    fields:
+      - name: meta_title
+        label: Judul SEO (opsional)
+        type: string
+        description: "Judul khusus untuk mesin pencari. Kosongkan untuk memakai judul artikel."
+        options:
+          maxlength: 70
+      - name: meta_description
+        label: Deskripsi SEO (opsional)
+        type: text
+        description: "Deskripsi khusus untuk mesin pencari."
+        options:
+          maxlength: 160
+
+actions:
+  - name: deploy
+    label: Deploy situs
+    workflow: deploy.yml
+    ref: current
+    confirm:
+      title: Deploy situs?
+      message: Menjalankan workflow deploy ke GitHub Pages.
+      button: Deploy
 
 content:
   - name: posts
@@ -26,6 +67,12 @@ content:
         update: "article(update): {name} — {userName}"
         delete: "article(delete): {name} — {userName}"
         rename: "article(rename): {oldFilename} -> {newFilename}"
+    actions:
+      - name: deploy
+        label: Deploy situs
+        scope: collection
+        workflow: deploy.yml
+        ref: current
     fields:
       - name: title
         label: Judul
@@ -37,9 +84,8 @@ content:
       - name: slug
         label: Slug URL
         type: string
-        required: true
         pattern: "^[a-z0-9-]+$"
-        description: "Identitas URL artikel, contoh: cara-membuat-website"
+        description: "Identitas URL artikel. Kosongkan untuk memakai nama file, contoh: cara-membuat-website"
         options:
           maxlength: 120
       - name: date
@@ -79,18 +125,9 @@ content:
         label: Gambar Sampul
         type: image
         description: "Opsional, gunakan gambar dari media uploads."
-      - name: meta_title
-        label: Judul SEO (opsional)
-        type: string
-        description: "Judul khusus untuk mesin pencari. Kosongkan untuk memakai judul artikel."
-        options:
-          maxlength: 70
-      - name: meta_description
-        label: Deskripsi SEO (opsional)
-        type: text
-        description: "Deskripsi khusus untuk mesin pencari."
-        options:
-          maxlength: 160
+      - name: seo
+        component: seo
+        label: Pengaturan SEO
       - name: draft
         label: Draft
         type: boolean

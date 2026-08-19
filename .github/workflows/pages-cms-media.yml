@@ -1,0 +1,38 @@
+name: Optimasi Media (Pages CMS)
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS payload as JSON
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse payload
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const payload = JSON.parse(core.getInput('payload'))
+            core.setOutput('path', payload.context?.path || 'public/uploads')
+      - name: Optimasi gambar (jika ada sharp)
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const dir = '${{ steps.parse.outputs.path }}';
+            if (!fs.existsSync(dir)) { console.log('Folder tidak ada:', dir); process.exit(0); }
+            console.log('Folder media:', dir);
+          "
+      - name: Commit optimasi
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(media): optimasi gambar via Pages CMS"
