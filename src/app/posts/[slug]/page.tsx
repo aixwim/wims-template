@@ -80,6 +80,7 @@ export default async function PostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const site = getSiteConfig();
 
   const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
@@ -102,9 +103,13 @@ export default async function PostPage({ params }: Props) {
       url: absoluteUrl('/about/'),
     },
     publisher: {
-      '@type': 'Person',
-      name: 'aixwim',
-      url: absoluteUrl('/about/'),
+      '@type': 'Organization',
+      name: site.siteName,
+      url: absoluteUrl('/'),
+      logo: {
+        '@type': 'ImageObject',
+        url: absoluteUrl('/favicon.svg'),
+      },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     image: absoluteUrl('/og.png'),

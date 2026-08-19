@@ -103,11 +103,17 @@ const jsonLd = {
   description,
   inLanguage: 'id-ID',
   publisher: {
-    '@type': 'Person',
-    name: 'aixwim',
-    url: absoluteUrl('/about/'),
-    email: 'mailto:hello@aixwim.dev',
-    sameAs: ['https://github.com/aixwim'],
+    '@type': 'Organization',
+    name: siteName,
+    url: absoluteUrl('/'),
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl('/favicon.svg'),
+    },
+    sameAs: [
+      'https://github.com/aixwim',
+      'https://github.com/aixwim/wims',
+    ],
   },
   potentialAction: {
     '@type': 'SearchAction',
@@ -117,6 +123,19 @@ const jsonLd = {
     },
     'query-input': 'required name=search_term_string',
   },
+};
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteName,
+  url: absoluteUrl('/'),
+  logo: {
+    '@type': 'ImageObject',
+    url: absoluteUrl('/favicon.svg'),
+  },
+  description,
+  sameAs: ['https://github.com/aixwim', 'https://github.com/aixwim/wims'],
 };
 
 const networkJsonLd = isHub
@@ -154,6 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {orgJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />}
         {networkJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(networkJsonLd) }} />}
       </head>
       <body className="min-h-screen bg-gray-950 text-gray-300 antialiased flex flex-col">
