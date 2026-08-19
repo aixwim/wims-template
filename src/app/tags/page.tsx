@@ -5,8 +5,8 @@ import { canonicalUrl, absoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Tags',
-  description: 'Jelajahi semua topik dan tag di blog aixwim.',
+  title: 'Daftar Topik',
+  description: 'Jelajahi semua topik dan tag untuk menemukan artikel favoritmu di blog ini.',
   alternates: { canonical: canonicalUrl('/tags/') },
 };
 

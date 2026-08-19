@@ -18,6 +18,8 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const siteConfig = getSiteConfig();
+
 export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
 }
@@ -27,7 +29,12 @@ function cleanMeta(s: string, max: number): string {
 }
 
 function metaTitle(post: Post): string {
-  return cleanMeta(post.metaTitle || post.title, 60);
+  const raw = (post.metaTitle || post.title).replace(/\s+/g, ' ').trim();
+  const budget = 55 - (siteConfig.siteName.length + 3);
+  const max = Math.max(30, budget);
+  if (raw.length <= max) return raw;
+  const cut = raw.slice(0, max).lastIndexOf(' ');
+  return cut > 20 ? raw.slice(0, cut).trim() : raw.slice(0, max).trim();
 }
 
 function metaDescription(post: Post): string {
@@ -80,7 +87,6 @@ export default async function PostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
-  const site = getSiteConfig();
 
   const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
@@ -104,7 +110,7 @@ export default async function PostPage({ params }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: site.siteName,
+      name: siteConfig.siteName,
       url: absoluteUrl('/'),
       logo: {
         '@type': 'ImageObject',

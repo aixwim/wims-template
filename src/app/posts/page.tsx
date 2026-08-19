@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/posts';
 import { href, tagHref } from '@/lib/url';
-import { canonicalUrl, absoluteUrl } from '@/lib/site';
+import { canonicalUrl, absoluteUrl, getSiteConfig } from '@/lib/site';
 import type { Metadata } from 'next';
+
+const site = getSiteConfig();
 
 export const metadata: Metadata = {
   title: 'Arsip Artikel',
-  description: 'Semua artikel di blog aixwim tentang teknologi, web development, SEO, dan tips.',
+  description: `Kumpulan artikel ${site.siteName} — baca panduan dan wawasan seputar ${site.tagline.toLowerCase()} secara lengkap di satu halaman.`,
   alternates: { canonical: canonicalUrl('/posts/') },
 };
 

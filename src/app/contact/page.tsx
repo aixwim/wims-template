@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { canonicalUrl, absoluteUrl } from '@/lib/site';
+import { canonicalUrl, absoluteUrl, getSiteConfig } from '@/lib/site';
+
+const site = getSiteConfig();
 
 export const metadata: Metadata = {
   title: 'Kontak',
-  description: 'Hubungi aixwim untuk pertanyaan, saran, atau kolaborasi.',
+  description: `Hubungi tim ${site.siteName} untuk pertanyaan, saran, atau kolaborasi seputar ${site.tagline.toLowerCase()}.`,
   alternates: { canonical: canonicalUrl('/contact/') },
 };
 

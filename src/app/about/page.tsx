@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { canonicalUrl, absoluteUrl } from '@/lib/site';
+import { canonicalUrl, absoluteUrl, getSiteConfig } from '@/lib/site';
 import { href } from '@/lib/url';
 import { getAllPosts } from '@/lib/posts';
 
+const site = getSiteConfig();
+
 export const metadata: Metadata = {
   title: 'Tentang',
-  description: 'Tentang aixwim, web developer, dan cerita di balik blog ini.',
+  description: `Tentang ${site.siteName} — ${site.tagline}. Kenali siapa di balik situs ini dan mengapa ${site.siteName.toLowerCase()} menghadirkan konten berkualitas untuk pembaca Indonesia.`,
   alternates: { canonical: canonicalUrl('/about/') },
 };
 

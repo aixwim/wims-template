@@ -1,11 +1,13 @@
 import { getAllPosts } from '@/lib/posts';
 import SearchInner from '@/components/SearchInner';
 import type { Metadata } from 'next';
-import { canonicalUrl } from '@/lib/site';
+import { canonicalUrl, getSiteConfig } from '@/lib/site';
+
+const site = getSiteConfig();
 
 export const metadata: Metadata = {
   title: 'Cari Artikel',
-  description: 'Cari dan temukan artikel tentang web development, SEO, teknologi, dan tips di blog aixwim.',
+  description: `Cari dan temukan artikel terbaik di ${site.siteName} — jelajahi konten seputar ${site.tagline.toLowerCase()} untuk pembaca Indonesia.`,
   alternates: { canonical: canonicalUrl('/search/') },
 };
 

@@ -1,5 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { href } from '@/lib/url';
+import { getSiteConfig } from '@/lib/site';
+
+const site = getSiteConfig();
+
+export const metadata: Metadata = {
+  title: 'Halaman Tidak Ditemukan',
+  description: `Halaman yang kamu cari tidak ditemukan di ${site.siteName}. Kembali ke beranda atau jelajahi artikel lainnya.`,
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
