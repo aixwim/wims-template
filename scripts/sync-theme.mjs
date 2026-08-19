@@ -50,6 +50,7 @@ const SYNC_PATHS = [
   '.github/workflows/deploy.yml',
   '.github/workflows/pages-cms-media.yml',
   'scripts',
+  'public',
   'registry/network.json',
 ];
 
