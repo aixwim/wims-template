@@ -48,6 +48,7 @@ const SYNC_PATHS = [
   '.gitignore',
   '.pages.yml',
   '.github/workflows/deploy.yml',
+  '.github/workflows/pages-cms-media.yml',
   'scripts',
   'registry/network.json',
 ];
