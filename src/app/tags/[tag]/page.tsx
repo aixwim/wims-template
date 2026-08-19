@@ -16,9 +16,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
   const decoded = decodeURIComponent(tag);
+  const title = decoded.charAt(0).toUpperCase() + decoded.slice(1);
   return {
-    title: `${decoded}`,
-    description: `Artikel dengan tag ${decoded}.`,
+    title,
+    description: `Kumpulan artikel bertema ${decoded} — baca panduan, tips, dan wawasan terbaik seputar ${decoded} untuk pembaca Indonesia.`,
     alternates: { canonical: tagCanonicalUrl(decoded) },
   };
 }

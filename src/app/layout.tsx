@@ -13,6 +13,20 @@ const network = getNetwork();
 const networkSites = [...network.sites, ...network.topics];
 const isHub = network.hub === site.repo;
 
+const categoryKeywords: Record<string, string[]> = {
+  Hub: ['jaringan konten indonesia', 'portal blog indonesia', 'kumpulan blog', 'blog bahasa indonesia', 'konten digital'],
+  Berita: ['berita indonesia', 'informasi terpercaya', 'jurnalisme', 'literasi media', 'fakta checking'],
+  Bisnis: ['bisnis indonesia', 'wirausaha', 'umkm', 'strategi bisnis', 'marketing digital'],
+  Entertainment: ['hiburan indonesia', 'film indonesia', 'musik indonesia', 'konser', 'streaming'],
+  Game: ['game indonesia', 'esports', 'game mobile', 'gaming', 'komunitas game'],
+  Kultur: ['budaya indonesia', 'tradisi nusantara', 'warisan budaya', 'seni tradisional', 'kearifan lokal'],
+  Living: ['desain interior', 'rumah minimalis', 'gaya hidup', 'berkebun di rumah', 'hemat energi'],
+  Olahraga: ['olahraga indonesia', 'sepak bola', 'kebugaran', 'lari', 'gaya hidup sehat'],
+  Selebritas: ['selebritas indonesia', 'hiburan', 'artis', 'fandom', 'dunia selebriti'],
+  Style: ['fashion indonesia', 'gaya berpakaian', 'streetwear', 'perawatan kulit', 'tren fashion'],
+  Teknologi: ['teknologi indonesia', 'web development', 'seo blog', 'tutorial coding', 'kecerdasan buatan'],
+};
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -27,7 +41,13 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description,
-  keywords: [site.categoryLabel.toLowerCase(), 'blog', 'aixwim', siteName.toLowerCase()],
+  keywords: [
+    site.categoryLabel.toLowerCase(),
+    ...(categoryKeywords[site.categoryLabel] || []),
+    'blog',
+    'aixwim',
+    siteName.toLowerCase(),
+  ],
   authors: [{ name: 'aixwim', url: absoluteUrl('/about/') }],
   creator: 'aixwim',
   publisher: 'aixwim',

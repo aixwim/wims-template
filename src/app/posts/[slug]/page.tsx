@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
-import { getPostBySlug, getAllPosts, getAdjacentPosts, formatDate, readingMin } from '@/lib/posts';
+import { getPostBySlug, getAllPosts, getAdjacentPosts, formatDate, readingMin, type Post } from '@/lib/posts';
 import { href, tagHref } from '@/lib/url';
 import { canonicalUrl, absoluteUrl, getSiteConfig, siteUrl, basePath } from '@/lib/site';
 import GiscusComments from '@/components/GiscusComments';
@@ -22,18 +22,38 @@ export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
 }
 
+function cleanMeta(s: string, max: number): string {
+  return s.replace(/\s+/g, ' ').trim().slice(0, max);
+}
+
+function metaTitle(post: Post): string {
+  return cleanMeta(post.metaTitle || post.title, 60);
+}
+
+function metaDescription(post: Post): string {
+  const raw = post.metaDescription || post.excerpt || '';
+  let desc = cleanMeta(raw, 160);
+  if (desc.length >= 155) {
+    const cut = desc.slice(0, 152).lastIndexOf(' ');
+    if (cut > 40) desc = desc.slice(0, cut).trim();
+  }
+  return desc;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
   const url = canonicalUrl(`/posts/${slug}/`);
+  const title = metaTitle(post);
+  const description = metaDescription(post);
   return {
-    title: post.metaTitle || post.title,
-    description: post.metaDescription || post.excerpt,
+    title,
+    description,
     alternates: { canonical: url },
     openGraph: {
-      title: post.metaTitle || post.title,
-      description: post.metaDescription || post.excerpt,
+      title,
+      description,
       url,
       type: 'article',
       publishedTime: post.date.toISOString(),
@@ -42,8 +62,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.metaTitle || post.title,
-      description: post.metaDescription || post.excerpt,
+      title,
+      description,
       images: [absoluteUrl('/og.png')],
     },
   };
