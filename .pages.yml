@@ -146,3 +146,33 @@ content:
         - category
         - date
         - tags
+  - name: site
+    label: Pengaturan Situs
+    type: file
+    path: site.config.json
+    format: json
+    commit:
+      templates:
+        update: "config(update): {name} — {userName}"
+    fields:
+      - name: googleVerification
+        label: Verifikasi Google Search Console
+        type: string
+        description: "Token dari Google Search Console (Add property → HTML tag), contoh: abcDEF123xyzABCdef456xyz. Kosongkan jika belum."
+        pattern: "^[A-Za-z0-9_-]{10,}$"
+        options:
+          maxlength: 100
+      - name: tagline
+        label: Slogan
+        type: string
+        description: "Slogan singkat situs."
+        options:
+          maxlength: 80
+      - name: description
+        label: Deskripsi
+        type: text
+        description: "Deskripsi meta situs untuk SEO."
+      - name: categoryLabel
+        label: Label Kategori
+        type: string
+        description: "Nama kategori yang ditampilkan, contoh: Teknologi."
