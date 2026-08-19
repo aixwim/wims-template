@@ -18,18 +18,21 @@ export async function GET() {
       <link>${siteUrl}${base}/posts/${post.slug}/</link>
       <guid isPermaLink="true">${siteUrl}${base}/posts/${post.slug}/</guid>
       <description><![CDATA[${post.excerpt}]]></description>
+      ${(post.tags ?? []).map((t) => `<category><![CDATA[${t}]]></category>`).join('\n      ')}
+      <content:encoded><![CDATA[${post.body.trim()}]]></content:encoded>
       <pubDate>${post.date.toUTCString()}</pubDate>
     </item>`
     )
     .join('');
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
   <title>${site.siteName}</title>
   <link>${siteUrl}${base}/</link>
   <description>${site.description}</description>
   <language>id</language>
+  <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
   <atom:link href="${siteUrl}${base}/rss.xml" rel="self" type="application/rss+xml"/>
   ${items}
 </channel>
