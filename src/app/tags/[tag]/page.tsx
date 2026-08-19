@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPostsByTag, getAllTags, formatDate } from '@/lib/posts';
 import { href } from '@/lib/url';
-import { canonicalUrl } from '@/lib/site';
+import { canonicalUrl, tagCanonicalUrl } from '@/lib/site';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
@@ -15,23 +15,25 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
+  const decoded = decodeURIComponent(tag);
   return {
-    title: `${tag}`,
-    description: `Artikel dengan tag ${tag}.`,
-    alternates: { canonical: canonicalUrl(`/tags/${tag}/`) },
+    title: `${decoded}`,
+    description: `Artikel dengan tag ${decoded}.`,
+    alternates: { canonical: tagCanonicalUrl(decoded) },
   };
 }
 
 export default async function TagPage({ params }: Props) {
   const { tag } = await params;
-  const posts = getPostsByTag(tag);
+  const decoded = decodeURIComponent(tag);
+  const posts = getPostsByTag(decoded);
   if (posts.length === 0) notFound();
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Artikel dengan tag ${tag}`,
-    url: canonicalUrl(`/tags/${tag}/`),
+    name: `Artikel dengan tag ${decoded}`,
+    url: tagCanonicalUrl(decoded),
     numberOfItems: posts.length,
     itemListElement: posts.map((post, i) => ({
       '@type': 'ListItem',
@@ -48,7 +50,7 @@ export default async function TagPage({ params }: Props) {
       <header className="mb-10">
         <span className="badge bg-brand/15 text-brand mb-4">Tag</span>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-3">
-          {tag}
+          {decoded}
         </h1>
         <p className="text-gray-600 dark:text-gray-400">{posts.length} artikel dengan tag ini.</p>
       </header>

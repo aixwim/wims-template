@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllTags } from '@/lib/posts';
-import { href } from '@/lib/url';
+import { tagHref } from '@/lib/url';
 import { canonicalUrl, absoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
@@ -23,7 +23,7 @@ export default function TagsPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: `${tag}`,
-      url: absoluteUrl(`/tags/${tag}/`),
+      url: absoluteUrl(tagHref(tag)),
     })),
   };
 
@@ -57,7 +57,7 @@ export default function TagsPage() {
           return (
             <Link
               key={tag}
-              href={href(`/tags/${tag}/`)}
+              href={tagHref(tag)}
               prefetch={false}
               className={`group flex items-center justify-between rounded-2xl bg-gradient-to-br ${gradients[i % 4]} border border-gray-100 dark:border-gray-800 px-5 py-4 hover:shadow-lg hover:-translate-y-0.5 transition-all`}
             >

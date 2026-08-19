@@ -32,3 +32,4 @@ export function getSiteConfig(): SiteConfig {
 export const basePath = '/' + getSiteConfig().repo;
 export const canonicalUrl = (p: string) => siteUrl + basePath + p;
 export const absoluteUrl = (p: string) => siteUrl + basePath + p;
+export const tagCanonicalUrl = (tag: string) => canonicalUrl(`/tags/${encodeURIComponent(tag)}/`);

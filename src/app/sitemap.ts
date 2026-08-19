@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const allTags = [...new Set(posts.flatMap((p) => p.tags))];
   const tagPages = allTags.map((tag) => ({
-    url: siteUrl + basePath + `/tags/${tag}/`,
+    url: siteUrl + basePath + `/tags/${encodeURIComponent(tag)}/`,
     lastModified: dateOnly(new Date()),
     changeFrequency: 'weekly' as const,
     priority: 0.5,

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/posts';
-import { href } from '@/lib/url';
+import { href, tagHref } from '@/lib/url';
 import { canonicalUrl, absoluteUrl } from '@/lib/site';
 import type { Metadata } from 'next';
 
@@ -49,7 +49,7 @@ export default function PostsPage() {
         {tags.map(({ tag, count }) => (
           <Link
             key={tag}
-            href={href(`/tags/${tag}/`)}
+            href={tagHref(tag)}
             prefetch={false}
             className="badge bg-gray-100 text-gray-700 hover:bg-brand/20 hover:text-brand dark:bg-gray-800 dark:text-gray-300 transition-colors"
           >

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import { getPostBySlug, getAllPosts, getAdjacentPosts, formatDate, readingMin } from '@/lib/posts';
-import { href } from '@/lib/url';
+import { href, tagHref } from '@/lib/url';
 import { canonicalUrl, absoluteUrl, getSiteConfig, siteUrl, basePath } from '@/lib/site';
 import GiscusComments from '@/components/GiscusComments';
 import ShareButtons from '@/components/ShareButtons';
@@ -168,7 +168,7 @@ export default async function PostPage({ params }: Props) {
                 {post.tags.map((tag) => (
                   <Link
                     key={tag}
-                    href={href(`/tags/${tag}/`)}
+                    href={tagHref(tag)}
                     prefetch={false}
                     className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1.5 hover:bg-brand/20 hover:text-brand transition-colors"
                   >

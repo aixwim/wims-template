@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { href } from '@/lib/url';
+import { href, tagHref } from '@/lib/url';
 import Logo from './Logo';
 import { getAllTags } from '@/lib/posts';
 import { getSiteConfig } from '@/lib/site';
@@ -82,7 +82,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               {tags.map(({ tag, count }) => (
                 <li key={tag}>
-                  <Link href={href(`/tags/${tag}/`)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-brand dark:text-gray-400 dark:hover:text-brand transition-colors">
+                  <Link href={tagHref(tag)} prefetch={false} className="inline-flex items-center gap-2 text-gray-500 hover:text-brand dark:text-gray-400 dark:hover:text-brand transition-colors">
                     <span>{tag}</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">({count})</span>
                   </Link>
