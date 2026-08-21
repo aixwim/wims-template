@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title>Wim Template</title>
+  <link>https://aixwim.github.io/wims-template/</link>
+  <description>Deskripsi meta situs.</description>
+  <language>id</language>
+  <lastBuildDate>Fri, 21 Aug 2026 16:05:38 GMT</lastBuildDate>
+  <atom:link href="https://aixwim.github.io/wims-template/rss.xml" rel="self" type="application/rss+xml"/>
+  
+    <item>
+      <title><![CDATA[Selamat Datang di Situs Wim]]></title>
+      <link>https://aixwim.github.io/wims-template/posts/selamat-datang/</link>
+      <guid isPermaLink="true">https://aixwim.github.io/wims-template/posts/selamat-datang/</guid>
+      <description><![CDATA[Template situs jaringan Wim. Ganti identitas di site.config.json dan tambahkan kontenmu di folder content.]]></description>
+      <category><![CDATA[perkenalan]]></category>
+      <category><![CDATA[template]]></category>
+      <content:encoded><![CDATA[Ini adalah halaman contoh dari template jaringan **Wim**.
+
+Template ini dibangun dengan **Next.js** (static export) dan sudah siap dipakai:
+
+1. Salin repo template ke repo situsmu.
+2. Isi `site.config.json` (repo, brand, tagline, dll).
+3. Tambahkan artikel Markdown di folder `content/`.
+4. Jalankan `npm run assets` untuk generate `og.png` dan favicon sesuai brand.
+5. Build dan deploy ke GitHub Pages.
+
+Hapus file ini saat kontenmu sudah siap.]]></content:encoded>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+</channel>
+</rss>

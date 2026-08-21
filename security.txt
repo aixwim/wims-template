@@ -1,0 +1,4 @@
+Contact: mailto:hello@aixwim.dev
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: id, en
+Canonical: https://aixwim.github.io/wims/security.txt

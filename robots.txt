@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://aixwim.github.io/wims-template/sitemap.xml
