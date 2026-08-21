@@ -28,13 +28,18 @@ function cleanMeta(s: string, max: number): string {
   return s.replace(/\s+/g, ' ').trim().slice(0, max);
 }
 
+const trailingWords = /\s+\(?(yang|untuk|dan|dari|sebelum|setelah|dengan|cara|panduan|mengenal|memilih|mengapa|agar|di|ke|dalam|pada|bagi)$/i;
+
 function metaTitle(post: Post): string {
   const raw = (post.metaTitle || post.title).replace(/\s+/g, ' ').trim();
   const budget = 55 - (siteConfig.siteName.length + 3);
   const max = Math.max(30, budget);
   if (raw.length <= max) return raw;
   const cut = raw.slice(0, max).lastIndexOf(' ');
-  return cut > 20 ? raw.slice(0, cut).trim() : raw.slice(0, max).trim();
+  const shortened = cut > 20 ? raw.slice(0, cut).trim() : raw.slice(0, max).trim();
+  let natural = shortened;
+  while (trailingWords.test(natural)) natural = natural.replace(trailingWords, '').trim();
+  return natural;
 }
 
 function metaDescription(post: Post): string {
